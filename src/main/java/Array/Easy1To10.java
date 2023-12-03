@@ -16,6 +16,7 @@ public class Easy1To10 {
         System.out.print(searchInsert(test1,2));*/
     }
 
+
     //66. Plus One
     public static int[] plusOne(int[] digits) {
         if (digits==null){
