@@ -3,7 +3,7 @@ package Array;
 public class Easy1To10 {
     public static void main(String[] args) {
         //66. Plus One
-        int[] orig = {1,2,3};
+        int[] orig = {9};
         //orig = new int[orig.length+1];
         System.out.println(orig);
         plusOne(orig);
@@ -24,8 +24,8 @@ public class Easy1To10 {
         for(int i=digits.length-1;i>=0;i--){
             if(digits[i] < 9){
                 digits[i]++;
+                return digits;
             }
-            return digits;
         }
         digits = new int[digits.length+1];
         digits[0]=1;
