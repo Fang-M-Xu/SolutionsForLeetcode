@@ -2,24 +2,27 @@ package Array;
 
 public class Easy1To10 {
     public static void main(String[] args) {
-
+        int tes1 = 1+(3-1)>>1;
+        int tes2 = 1+((3-1)>>1);
+        System.out.println(tes1+","+tes2);
+        int[] test1 = {1,3};
+        System.out.print(searchInsert(test1,2));
     }
 
-    public int searchInsert(int[] nums, int target) {
-        int low = 0;
-        int high = nums.length;
+    public static int searchInsert(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length-1;
 
-        while(low < high){
-            int middle = (low+high)/2;
+        while(start <= end){
+            int middle = start+((end-start)>>1);
             if(nums[middle] == target){
                 return middle;
             }else if(nums[middle] > target){
-                high = middle;
-            }else  if(nums[middle] < target){
-                low = middle;
+                end = middle-1;
+            }else {
+                start = middle+1;
             }
         }
-
-        return high;
+        return start;
     }
 }
