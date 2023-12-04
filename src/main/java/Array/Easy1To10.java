@@ -6,10 +6,13 @@ import java.util.List;
 
 public class Easy1To10 {
     public static void main(String[] args) {
-
+        //228. Summary Ranges
+        int[] test228={};
+        List<String> result = summaryRanges(test228);
+        System.out.println(result);
         //121.Best Time to Buy and Sell Stock
-        int[] tes121 = {7,3,9,1,6,4};
-        System.out.println(maxProfit(tes121));
+        //int[] tes121 = {7,3,9,1,6,4};
+        //System.out.println(maxProfit(tes121));
         //118. Pascal's Triangle
         //generate(5);
         //66. Plus One
@@ -25,7 +28,37 @@ public class Easy1To10 {
         int[] test1 = {1,3};
         System.out.print(searchInsert(test1,2));*/
     }
-
+    //228. Summary Ranges
+    public static List<String> summaryRanges(int[] nums) {
+        List<String> result = new ArrayList<String>();
+        if(nums == null || nums.length==0){
+            return result;
+        }
+        int start = nums[0];
+        int end = 0;
+        for(int i=0; i<nums.length-1; i++){
+            end = nums[i];
+            if(nums[i]+1!=nums[i+1]){
+                String item = "";
+                if(start == end){
+                    item = String.valueOf(start);
+                }else {
+                    item = String.valueOf(start) + "->" + String.valueOf(end);
+                }
+                result.add(item);
+                start = nums[i + 1];
+            }
+        }
+        if(start == nums[nums.length-1]){
+            String item = String.valueOf(start);
+            result.add(item);
+        }else{
+            String item = String.valueOf(start)+"->"+String.valueOf(nums[nums.length-1]);
+            result.add(item);
+        }
+        return result;
+    }
+    //136. Single Number
     //121.Best Time to Buy and Sell Stock
     public static int maxProfit(int[] prices) {
         if(prices == null){
