@@ -35,7 +35,6 @@ public class Easy1To10 {
             result.add(row);
             return result;
         }
-
         result = generate(numRows-1);
         List<Integer> row = new ArrayList<Integer>();
         row.add(1);
