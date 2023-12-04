@@ -28,7 +28,6 @@ public class Easy1To10 {
        if(numRows == 0){
            return result;
        }
-
         if(numRows == 1){
             List<Integer> row = new ArrayList<Integer>();
             row.add(1);
