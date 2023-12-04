@@ -1,13 +1,20 @@
 package Array;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Easy1To10 {
     public static void main(String[] args) {
+        //118. Pascal's Triangle
+        generate(5);
+
         //66. Plus One
-        int[] orig = {8,6,9,9};
-        //orig = new int[orig.length+1];
+/*        int[] orig = {8,6,9,9};
+        orig = new int[orig.length+1];
         System.out.println(orig);
         plusOne(orig);
-        System.out.println(orig);
+        System.out.println(orig);*/
         //35. Search Insert Position
         /*int tes1 = 1+(3-1)>>1;
         int tes2 = 1+((3-1)>>1);
@@ -15,6 +22,52 @@ public class Easy1To10 {
         int[] test1 = {1,3};
         System.out.print(searchInsert(test1,2));*/
     }
+    //118. Pascal's Triangle
+    public static List<List<Integer>> generate(int numRows) {
+       List<List<Integer>> result = new ArrayList<List<Integer>>();
+       if(numRows == 0){
+           return result;
+       }
+        if(numRows == 1){
+            List<Integer> row = new ArrayList<Integer>();
+            row.add(1);
+            result.add(row);
+            return result;
+        }
+
+        result = generate(numRows-1);
+        List<Integer> row = new ArrayList<Integer>();
+        row.add(1);
+        for(int i =1;i< numRows-1;i++){
+            row.add(result.get(numRows-2).get(i-1)+result.get(numRows-2).get(i));
+        }
+        row.add(1);
+        result.add(row);
+        return result;
+
+     /*   if (numRows == 0) return new ArrayList<List<Integer>>();
+        if (numRows == 1) {
+            List<List<Integer>> result = new ArrayList<List<Integer>>();
+            result.add(Arrays.asList(1));
+            return result;
+        }
+
+        List<List<Integer>> prevRows = generate(numRows - 1);
+        List<Integer> newRow = new ArrayList<Integer>();
+
+        for (int i = 0; i < numRows; i++) {
+            newRow.add(1);
+        }
+
+        for (int i = 1; i < numRows - 1; i++) {
+            newRow.set(i, prevRows.get(numRows - 2).get(i - 1) + prevRows.get(numRows - 2).get(i));
+        }
+
+        prevRows.add(newRow);
+        return prevRows;*/
+    }
+
+
     //88. Merge Sorted Array
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int end1 = m-1;
