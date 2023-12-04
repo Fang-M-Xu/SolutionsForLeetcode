@@ -6,11 +6,14 @@ import java.util.List;
 
 public class Easy1To10 {
     public static void main(String[] args) {
-        //118. Pascal's Triangle
-        generate(5);
 
+        //121.Best Time to Buy and Sell Stock
+        int[] tes121 = {7,3,9,1,6,4};
+        System.out.println(maxProfit(tes121));
+        //118. Pascal's Triangle
+        //generate(5);
         //66. Plus One
-/*        int[] orig = {8,6,9,9};
+        /*int[] orig = {8,6,9,9};
         orig = new int[orig.length+1];
         System.out.println(orig);
         plusOne(orig);
@@ -22,6 +25,30 @@ public class Easy1To10 {
         int[] test1 = {1,3};
         System.out.print(searchInsert(test1,2));*/
     }
+
+    //121.Best Time to Buy and Sell Stock
+    public static int maxProfit(int[] prices) {
+        if(prices == null){
+            return 0;
+        }
+
+        int leastItem = Integer.MAX_VALUE;
+        int profit = 0;
+        int difference = 0;
+
+        for(int i = 0;i<prices.length;i++){
+            if(prices[i]<leastItem){
+                leastItem = prices[i];
+            }
+            difference = prices[i] - leastItem;
+            if(profit<difference){
+                profit = difference;
+            }
+        }
+        return profit;
+    }
+
+
     //118. Pascal's Triangle
     public static List<List<Integer>> generate(int numRows) {
        List<List<Integer>> result = new ArrayList<List<Integer>>();
