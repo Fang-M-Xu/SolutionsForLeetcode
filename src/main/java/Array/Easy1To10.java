@@ -1,15 +1,19 @@
 package Array;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.*;
 
 public class Easy1To10 {
     public static void main(String[] args) {
-        //228. Summary Ranges
-        int[] test228={};
-        List<String> result = summaryRanges(test228);
+        //349. Intersection of Two Arrays
+        int[] param1 = {1,2,2,1};
+        int[] param2 = {2,2};
+        int[] result = intersection(param1,param2);
         System.out.println(result);
+        //228. Summary Ranges
+//        int[] test228={};
+//        List<String> result = summaryRanges(test228);
+//        System.out.println(result);
         //121.Best Time to Buy and Sell Stock
         //int[] tes121 = {7,3,9,1,6,4};
         //System.out.println(maxProfit(tes121));
@@ -28,6 +32,36 @@ public class Easy1To10 {
         int[] test1 = {1,3};
         System.out.print(searchInsert(test1,2));*/
     }
+
+    //349. Intersection of Two Arrays
+    public static int[] intersection(int[] nums1, int[] nums2) {
+        if(nums1 == null && nums2 == null){
+            return nums1;
+        }
+        Map<Integer,Integer> temp1 = new HashMap<Integer,Integer>();
+        Map<Integer,Integer> temp2 = new HashMap<Integer,Integer>();
+        for(int num:nums1){
+            temp1.put(num,1);
+        }
+        for(int num:nums2){
+            temp2.put(num,1);
+        }
+        Set<Integer> tempResult = new HashSet<Integer>();
+        for(int nums:nums2){
+            Integer item1 = temp1.getOrDefault(nums,0);
+            Integer item2 = temp2.getOrDefault(nums,0);
+            if (item1+item2 == 2){
+                tempResult.add(nums);
+            }
+        }
+        int[] result = new int[tempResult.size()];
+        int n = 0;
+        for(Integer item:tempResult){
+            result[n++]=item;
+        }
+        return result;
+    }
+
     //228. Summary Ranges
     public static List<String> summaryRanges(int[] nums) {
         List<String> result = new ArrayList<String>();
