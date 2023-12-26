@@ -32,6 +32,30 @@ public class Easy1To10 {
         int[] test1 = {1,3};
         System.out.print(searchInsert(test1,2));*/
     }
+    //350. Intersection of Two Arrays II
+    public static int[] intersect(int[] nums1, int[] nums2) {
+        if(nums1 == null || nums2 == null){
+            return nums1;
+        }
+        Map<Integer,Integer> temp1 = new HashMap<Integer,Integer>();
+        for(int item:nums1){
+            int value = temp1.getOrDefault(item,0);
+            temp1.put(item,value+1);
+        }
+        List<Integer> list_result = new ArrayList<>();
+        for(int item:nums2){
+            int value = temp1.getOrDefault(item,0);
+            if(value > 0 ){
+                list_result.add(item);
+                temp1.put(item,value-1);
+            }
+        }
+        int[] result = new int[list_result.size()];
+        for(int i = 0;i<list_result.size();i++){
+            result[i] = list_result.get(i);
+        }
+        return result;
+    }
 
     //349. Intersection of Two Arrays
     public static int[] intersection(int[] nums1, int[] nums2) {
