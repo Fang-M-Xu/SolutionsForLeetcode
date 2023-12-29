@@ -6,9 +6,15 @@ import java.util.Map;
 public class Easy20T40 {
 
     public static void main(String[] args) {
+
+        //953. Verifying an Alien Dictionary
+        String[] param1 = {"hello","leetcode"};
+        String order = "hlabcdefgijkmnopqrstuvwxyz";
+        boolean result =isAlienSorted(param1,order);
+
         //944. Delete Columns to Make Sorted
-        String[] param1 = {"a","b"};
-        int result = minDeletionSize(param1);
+        //String[] param1 = {"a","b"};
+        //int result = minDeletionSize(param1);
         //733. Flood Fill
         //int[][] param1 = {{1,1,1},{1,1,0},{1,0,1}};
         //int[][] result = floodFill(param1,1,1,2);
@@ -22,6 +28,30 @@ public class Easy20T40 {
         System.out.println(result);
     }
 
+    //953. Verifying an Alien Dictionary
+    public static boolean isAlienSorted(String[] words, String order) {
+        Map<Character,Integer> char_order = new HashMap<>();
+        for(int i = 0; i < order.length(); i++){
+            char_order.put(order.charAt(i),i);
+        }
+
+        for(int i = 0; i<words.length-1;i++){
+            for(int j = 0; j<words[i].length();j++){
+                if(j==words[i+1].length()){
+                    return false;
+                }
+                char first_word = words[i].charAt(j);
+                char second_word = words[i+1].charAt(j);
+
+                if(char_order.get(first_word)>char_order.get(second_word)){
+                    return false;
+                }else if(char_order.get(first_word)<char_order.get(second_word)){
+                    break;
+                }
+            }
+        }
+        return true;
+    }
 
     //944. Delete Columns to Make Sorted
     public static int minDeletionSize(String[] strs) {
