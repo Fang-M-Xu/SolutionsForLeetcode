@@ -6,9 +6,12 @@ import java.util.Map;
 public class Easy20T40 {
 
     public static void main(String[] args) {
+        //724. Find Pivot Index
+        int[] param1 = {1,7,3,6,5,6};
+        int result = pivotIndex(param1);
         //697. Degree of an Array
-        int[] param1 = {1,2,2,3,1,4,2};
-        int result = findShortestSubArray(param1);
+        //int[] param1 = {1,2,2,3,1,4,2};
+        //int result = findShortestSubArray(param1);
         System.out.println(result);
     }
 
@@ -42,11 +45,21 @@ public class Easy20T40 {
         return min_len;
     }
 
-    public static int findShortestSubArray2(int[] nums) {
-        Map<Integer,Integer> start_index = new HashMap<>();
-        Map<Integer,Integer> end_index = new HashMap<>();
-        Map<Integer,Integer> degree = new HashMap<>();
-        int min_len = 0;
-        return min_len;
+    //724. Find Pivot Index
+    public static int pivotIndex(int[] nums) {
+        int left_sum = 0;
+        int right_sum = 0;
+        for(int num:nums){
+            right_sum += num;
+        }
+
+        for(int i  = 0; i< nums.length;i++){
+            right_sum -= nums[i];
+            if(left_sum == right_sum){
+                return i;
+            }
+            left_sum += nums[i];
+        }
+        return -1;
     }
 }
