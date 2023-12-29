@@ -6,16 +6,64 @@ import java.util.Map;
 public class Easy20T40 {
 
     public static void main(String[] args) {
-
+        //944. Delete Columns to Make Sorted
+        String[] param1 = {"a","b"};
+        int result = minDeletionSize(param1);
+        //733. Flood Fill
+        //int[][] param1 = {{1,1,1},{1,1,0},{1,0,1}};
+        //int[][] result = floodFill(param1,1,1,2);
         //704. Binary Search
-        int[] param1 = {1,3,6,8,16,20};
-        int result = search(param1,18);
+        //int[] param1 = {1,3,6,8,16,20};
+        //int result = search(param1,18);
         //724. Find Pivot Index
         //int result = pivotIndex(param1);
         //697. Degree of an Array{1,2,2,3,1,4,2};
         //int result = findShortestSubArray(param1);
         System.out.println(result);
     }
+
+
+    //944. Delete Columns to Make Sorted
+    public static int minDeletionSize(String[] strs) {
+        int index_num = 0;
+        for(int i=0;i<strs[0].length();i++){
+            for(int j=0;j<strs.length-1;j++){
+                char first_char = strs[j].charAt(i);
+                char second_char = strs[j+1].charAt(i);
+                if(first_char>second_char){
+                    index_num++;
+                    break;
+                }
+            }
+        }
+        return index_num;
+    }
+
+    //733. Flood Fill
+    public static int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        if(image[sr][sc]==color){
+            return image;
+        }
+        fill(image,sr, sc, color, image[sr][sc]);
+        return image;
+    }
+
+    public static void fill(int[][] image, int sr, int sc, int color, int original) {
+        if(sr<0||sc<0||image.length<=sr||image[0].length<=sc){
+            return ;
+        }
+
+        if(original != image[sr][sc]) {
+            return;
+        }
+
+        image[sr][sc] = color;
+        fill(image,sr+1,sc,color,original);
+        fill(image,sr-1,sc,color,original);
+        fill(image,sr,sc+1,color,original);
+        fill(image,sr,sc-1,color,original);
+    }
+
     //724. Find Pivot Index
     public static int pivotIndex(int[] nums) {
         int left_sum = 0;
