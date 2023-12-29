@@ -1,16 +1,21 @@
 package Array;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Easy20T40 {
 
     public static void main(String[] args) {
 
+        //977. Squares of a Sorted Array
+        int[] param1 = {-7,-3,2,3,11};
+        int[] result=sortedSquares(param1);
         //953. Verifying an Alien Dictionary
-        String[] param1 = {"hello","leetcode"};
-        String order = "hlabcdefgijkmnopqrstuvwxyz";
-        boolean result =isAlienSorted(param1,order);
+//        String[] param1 = {"hello","leetcode"};
+//        String order = "hlabcdefgijkmnopqrstuvwxyz";
+//        boolean result =isAlienSorted(param1,order);
 
         //944. Delete Columns to Make Sorted
         //String[] param1 = {"a","b"};
@@ -26,6 +31,23 @@ public class Easy20T40 {
         //697. Degree of an Array{1,2,2,3,1,4,2};
         //int result = findShortestSubArray(param1);
         System.out.println(result);
+    }
+
+    //977. Squares of a Sorted Array
+    public static int[] sortedSquares(int[] nums) {
+        int[] newNums = new int[nums.length];
+        int left = 0;
+        int right = nums.length-1;
+        for(int i=nums.length-1; i>= 0; i--){
+            if(Math.abs(nums[left])>Math.abs(nums[right])){
+                newNums[i] = nums[left]*nums[left];
+                left++;
+            }else{
+                newNums[i] = nums[right]*nums[right];
+                right--;
+            }
+        }
+        return newNums;
     }
 
     //953. Verifying an Alien Dictionary
