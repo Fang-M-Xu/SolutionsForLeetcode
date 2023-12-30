@@ -1,17 +1,18 @@
 package Array;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Easy20T40 {
 
     public static void main(String[] args) {
+        //1046. Last Stone Weight
+        int[] param1 = {2,7,4,1,8,1};
+        int result=lastStoneWeight(param1);
+//        Arrays.sort(param1);
+//        System.out.println(param1);
 
         //977. Squares of a Sorted Array
-        int[] param1 = {-7,-3,2,3,11};
-        int[] result=sortedSquares(param1);
+        //int[] result=sortedSquares(param1);
         //953. Verifying an Alien Dictionary
 //        String[] param1 = {"hello","leetcode"};
 //        String order = "hlabcdefgijkmnopqrstuvwxyz";
@@ -33,6 +34,32 @@ public class Easy20T40 {
         System.out.println(result);
     }
 
+    //1046. Last Stone Weight
+    public static int lastStoneWeight(int[] stones) {
+        if(stones.length==1){
+            return 1;
+        }
+        int stone_weight = 0;
+        for(int i = 0;i<stones.length;i++) {
+            Arrays.sort(stones);
+            int largest = stones[stones.length - 1];
+            int larger = stones[stones.length - 2];
+            int diff = largest-larger;
+            if(largest == larger){
+                stones[stones.length - 1] = 0;
+                stones[stones.length - 2] = 0;
+            }else {
+                stones[stones.length - 1] = 0;
+                stones[stones.length - 2] = diff;
+            }
+            Arrays.sort(stones);
+            if(stones[stones.length - 2] == 0){
+                stone_weight = stones[stones.length - 1];
+                break;
+            }
+        }
+        return stone_weight;
+    }
     //997. Find the Town Judge
     public static int findJudge(int n, int[][] trust) {
         Map<Integer,Integer> trusted_person = new HashMap();
