@@ -33,6 +33,23 @@ public class Easy20T40 {
         System.out.println(result);
     }
 
+    //997. Find the Town Judge
+    public static int findJudge(int n, int[][] trust) {
+        Map<Integer,Integer> trusted_person = new HashMap();
+        Map<Integer,Integer> betrust_person = new HashMap();
+        for(int[] pair: trust){
+            trusted_person.put(pair[0],trusted_person.getOrDefault(pair[0],0)+1);
+            betrust_person.put(pair[1],betrust_person.getOrDefault(pair[1],0)+1);
+        }
+        for(int person = 1; person<=n;person++){
+            int num_trusted=trusted_person.getOrDefault(person,0);
+            int num_betrust=betrust_person.getOrDefault(person,0);
+            if(num_trusted == 0 && num_betrust == n-1){
+                return person;
+            }
+        }
+        return -1;
+    }
     //977. Squares of a Sorted Array
     public static int[] sortedSquares(int[] nums) {
         int[] newNums = new int[nums.length];
