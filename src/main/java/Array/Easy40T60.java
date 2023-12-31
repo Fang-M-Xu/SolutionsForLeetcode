@@ -5,11 +5,31 @@ import java.util.*;
 public class Easy40T60 {
     public static void main(String[] args) {
         //1470. Shuffle the Array
-        int[] param1 = {2,5,1,3,4,7};
-        shuffle(param1,3);
+        int[] param1 = {48000,59000,99000,13000,78000,45000,31000,17000,39000,37000,93000,77000,33000,28000,4000,54000,67000,6000,1000,11000};
+        double result = average(param1);
+        //shuffle(param1,3);
         //1356. Sort Integers by The Number of 1 Bits
         //int[] param1 = {0,1,2,3,4,5,6,7,8};
         //sortByBits(param1);
+        System.out.println(result);
+    }
+
+    //1491. Average Salary Excluding the Minimum and Maximum Salary
+    public static double average(int[] salary) {
+        int max = 0;
+        int min = 1000001;
+        double sum = 0;
+        for(int person: salary){
+            if(person>max){
+                max=person;
+            }
+            if(person<min){
+                min=person;
+            }
+            sum +=person;
+        }
+        double result=(sum-max-min)/(salary.length-2);
+        return Math.round(result*100000)*0.00001d;
     }
 
     //1470. Shuffle the Array
