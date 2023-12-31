@@ -38,8 +38,8 @@ public class Easy40T60 {
             if(!arr_list.contains(whole_arr)){
                 missing_array.add(whole_arr);
             }
-            whole_arr++;*/
-        }
+            whole_arr++;
+        }*/
     }
 
     //1491. Average Salary Excluding the Minimum and Maximum Salary
