@@ -4,8 +4,26 @@ import java.util.*;
 
 public class Easy40T60 {
     public static void main(String[] args) {
-        int[] param1 = {0,1,2,3,4,5,6,7,8};
-        sortByBits(param1);
+        //1470. Shuffle the Array
+        int[] param1 = {2,5,1,3,4,7};
+        shuffle(param1,3);
+        //1356. Sort Integers by The Number of 1 Bits
+        //int[] param1 = {0,1,2,3,4,5,6,7,8};
+        //sortByBits(param1);
+    }
+
+    //1470. Shuffle the Array
+    public static int[] shuffle(int[] nums, int n) {
+        int[] arr_first = Arrays.copyOfRange(nums,0,n);
+        int[] arr_last = Arrays.copyOfRange(nums,n,2*n);
+        int[] result = new int[nums.length];
+        int merge_index=0;
+        for(int i = 0;i<n; i++){
+            result[merge_index] = arr_first[i];
+            result[++merge_index] = arr_last[i];
+            merge_index++;
+        }
+        return result;
     }
 
     //1356. Sort Integers by The Number of 1 Bits
