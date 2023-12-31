@@ -17,6 +17,22 @@ public class Easy40T60 {
         //sortByBits(param1);
         System.out.println(result);
     }
+
+    //1672. Richest Customer Wealth
+    public static int maximumWealth(int[][] accounts) {
+        int max_weight = 0;
+        for(int i=0; i<accounts.length; i++){
+            int sum = 0;
+            for(int j=0; j<accounts[i].length;j++){
+                sum+=accounts[i][j];
+            }
+            if(max_weight<sum){
+                max_weight=sum;
+            }
+        }
+        return max_weight;
+    }
+
     //1572. Matrix Diagonal Sum
     public static int diagonalSum(int[][] mat) {
         int mat_len = mat.length;
