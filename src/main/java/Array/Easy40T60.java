@@ -19,6 +19,24 @@ public class Easy40T60 {
         //sortByBits(param1);
         System.out.println(result);
     }
+    //1929. Concatenation of Array
+    public int[] getConcatenation(int[] nums) {
+
+        int nums_len = nums.length;
+        int[] new_arr = new int[nums.length*2];
+        System.arraycopy(nums,0,new_arr,0,nums_len);
+        System.arraycopy(nums,0,new_arr,nums_len,nums_len*2);
+        return new_arr;
+        /*        int[] new_arr = new int[nums.length*2];
+        for(int i=0; i<new_arr.length; i++){
+            if(i>=nums.length){
+                new_arr[i] = nums[i-nums.length];
+            }else {
+                new_arr[i] = nums[i];
+            }
+        }
+        return new_arr;*/
+    }
 
     //1920. Build Array from Permutation
     public static int[] buildArray(int[] nums) {
