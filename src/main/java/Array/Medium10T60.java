@@ -5,15 +5,59 @@ import java.util.*;
 
 public class Medium10T60 {
     public static void main(String[] args) {
+        //31. Next Permutation
+        int[] param1={1,2,3};
+        nextPermutation(param1);
+        //18. 4Sum
         //int[] param1={1,0,-1,0,-2,2};
         //fourSum(param1,0);
+        System.out.println("Good!");
     }
 
     //31. Next Permutation
-    public void nextPermutation(int[] nums) {
-
+    public static void nextPermutation(int[] nums) {
+        int decrease_index = getBreakPoint(nums);
+        if(decrease_index!=-1) {
+            int greater_index = getGreatValue(nums, decrease_index);
+            if(greater_index!=-1){
+                swap_value(nums, decrease_index, greater_index);
+            }
+        }
+        reverse(nums,decrease_index);
+    }
+    private static int getBreakPoint(int[] nums){
+        for(int i=nums.length-1;i>0;i--){
+            //23543,so find 3
+            if(nums[i]>nums[i-1]){
+                return i-1;
+            }
+        }
+        return -1;
+    }
+    private static int getGreatValue(int[] nums,int decrease_index){
+        for(int i=nums.length-1;i>0; i--){
+            if(nums[i]>nums[decrease_index]){
+                return i;
+            }
+        }
+        return -1;
     }
 
+    private static void swap_value(int[] nums,int left_index,int right_index){
+        int temp = nums[left_index];
+        nums[left_index]=nums[right_index];
+        nums[right_index]=temp;
+    }
+
+    private static void reverse(int[] nums,int decrease_index){
+        int left_index=decrease_index+1;
+        int right_index = nums.length-1;
+        while(left_index<right_index){
+            swap_value(nums,left_index,right_index);
+            left_index++;
+            right_index--;
+        }
+    }
     //18. 4Sum
     // this is not perfect,if it changed to 8sum,then we need create 6 lever loop,
     // it's inefficiency
@@ -56,6 +100,7 @@ public class Medium10T60 {
         BigDecimal target_big = new BigDecimal(target);
         List<List<Integer>> result = KSum(nums,target_big,4,0);
         return result;
+
     }
 
     private List<List<Integer>> KSum(int[] nums, BigDecimal target, int k,int sub_index){
