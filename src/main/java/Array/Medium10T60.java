@@ -6,7 +6,8 @@ import java.util.*;
 public class Medium10T60 {
     public static void main(String[] args) {
 
-        int[] param1={5,1,3};
+        int[] param1={5,7,7,8,8,10};
+        searchRange(param1,8);
         //33. Search in Rotated Sorted Array
         int res = search(param1,3);
         //31. Next Permutation
@@ -16,6 +17,29 @@ public class Medium10T60 {
         //fourSum(param1,0);
         System.out.println(res);
     }
+
+    //34. Find First and Last Position of Element in Sorted Array
+    public static int[] searchRange(int[] nums, int target) {
+        int first_index=findIndex(nums,target,0);
+        if(first_index>=nums.length||nums[first_index] != target){
+            return new int[] {-1,-1};
+        }
+        int last_index = findIndex(nums,target+1,first_index);
+        return new int[] {first_index,last_index-1};
+    }
+    private static int findIndex(int[] nums, int target, int start){
+        int end=nums.length-1;
+        while(start<end){
+            int middle=start+(end-start)/2;
+            if(nums[middle]<target){
+                start=middle+1;
+            }else{
+                end=middle-1;
+            }
+        }
+        return start;
+    }
+
     //33. Search in Rotated Sorted Array
     public static int search(int[] nums, int target) {
         int left=0;
