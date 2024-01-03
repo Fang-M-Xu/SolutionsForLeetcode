@@ -6,16 +6,42 @@ import java.util.*;
 public class Medium10T60 {
     public static void main(String[] args) {
 
-        int[] param1={5,7,7,8,8,10};
-        searchRange(param1,8);
+        String[][] param1= {{"5","3",".",".","7",".",".",".","."}
+                            ,{"6",".",".","1","9","5",".",".","."}
+                            ,{".","9","8",".",".",".",".","6","."}
+                            ,{"8",".",".",".","6",".",".",".","3"}
+                            ,{"4",".",".","8",".","3",".",".","1"}
+                            ,{"7",".",".",".","2",".",".",".","6"}
+                            ,{".","6",".",".",".",".","2","8","."}
+                            ,{".",".",".","4","1","9",".",".","5"}
+                            ,{".",".",".",".","8",".",".","7","9"}};
+        isValidSudoku(param1);
+        //34. Find First and Last Position of Element in Sorted Array
+        //searchRange(param1,8);
         //33. Search in Rotated Sorted Array
-        int res = search(param1,3);
+        //int res = search(param1,3);
         //31. Next Permutation
         //nextPermutation(param1);
         //18. 4Sum
         //int[] param1={1,0,-1,0,-2,2};
         //fourSum(param1,0);
-        System.out.println(res);
+        System.out.println("res");
+    }
+
+    //36. Valid Sudoku
+    public static boolean isValidSudoku(String[][] board) {
+        Set char_set = new HashSet();
+        for(int i=0;i<9; i++){
+            for(int j=0; j<9; j++){
+                if(board[i][j]!="."){
+                    String lab="c"+board[i][j]+")";
+                    if(!char_set.add(i+lab)||!char_set.add(lab+j)||!char_set.add(i/3+lab+j/3)){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     //34. Find First and Last Position of Element in Sorted Array
@@ -29,7 +55,7 @@ public class Medium10T60 {
     }
     private static int findIndex(int[] nums, int target, int start){
         int end=nums.length-1;
-        while(start<end){
+        while(start<=end){
             int middle=start+(end-start)/2;
             if(nums[middle]<target){
                 start=middle+1;
