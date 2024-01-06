@@ -6,8 +6,10 @@ import java.util.*;
 public class Medium10T60 {
     public static void main(String[] args) {
 
-        int[] params={2,3,5};
-        List<List<Integer>> res = combinationSum(params,8);
+        int[] params={7,0,9,6,9,6,1,7,9,0,1,2,9,0,3};
+        jump(params);
+        //39. Combination Sum
+        //List<List<Integer>> res = combinationSum(params,8);
        /* String[][] param1= {{"5","3",".",".","7",".",".",".","."}
                             ,{"6",".",".","1","9","5",".",".","."}
                             ,{".","9","8",".",".",".",".","6","."}
@@ -29,6 +31,27 @@ public class Medium10T60 {
         //fourSum(param1,0);
         System.out.println("res");
     }
+    //45. Jump Game II
+    public static int jump(int[] nums) {
+        if(nums.length==1){
+            return 0;
+        }
+        int maxJumpIndex=0;
+        int edgeIndex=0;
+        int JumpTime=0;
+        for(int i=0;i<nums.length;i++){
+            maxJumpIndex=Math.max(maxJumpIndex,i+nums[i]);
+            if(i==edgeIndex){
+                JumpTime++;
+                edgeIndex=maxJumpIndex;
+            }
+            if(edgeIndex>=nums.length-1){
+                break;
+            }
+        }
+        return JumpTime;
+    }
+
     //39. Combination Sum
     static List<Integer> tempItem = new ArrayList<>();
     static List<List<Integer>> result = new ArrayList<>();
