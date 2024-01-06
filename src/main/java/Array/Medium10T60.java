@@ -6,8 +6,9 @@ import java.util.*;
 public class Medium10T60 {
     public static void main(String[] args) {
 
+        int[][] duparam = {{1,2,3},{4,5,6},{7,8,9}};
         int[] params={7,0,9,6,9,6,1,7,9,0,1,2,9,0,3};
-        jump(params);
+        rotate(duparam);
         //39. Combination Sum
         //List<List<Integer>> res = combinationSum(params,8);
        /* String[][] param1= {{"5","3",".",".","7",".",".",".","."}
@@ -31,6 +32,27 @@ public class Medium10T60 {
         //fourSum(param1,0);
         System.out.println("res");
     }
+    //48. Rotate Image
+    public static void rotate(int[][] matrix) {
+        int len = matrix.length;
+        int i=0;
+        for(int j=len-1; j>0;j--){
+            int temp = matrix[i][j];
+            matrix[i][j] = matrix[len-1-j][i];
+            matrix[len-1-j][i]=matrix[len-1-i][len-1-j];
+            matrix[len-1-i][len-1-j]= matrix[len-1-(len-1-j)][len-1-i];
+            matrix[len-1-(len-1-j)][len-1-i]=temp;
+        }
+/*   Counterclockwise
+     for(int j=len-1; j>0;j--){
+            int temp = matrix[i][j];
+            matrix[i][j]=matrix[j][len-1-i];
+            matrix[j][len-1-i]=matrix[len-1-i][len-1-j];
+            matrix[len-1-i][len-1-j]=matrix[len-1-j][len-(len-1-i)-1];
+            matrix[len-1-j][len-(len-1-i)-1]=temp;
+        }*/
+    }
+
     //45. Jump Game II
     public static int jump(int[] nums) {
         if(nums.length==1){
