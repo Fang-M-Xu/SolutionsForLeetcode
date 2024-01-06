@@ -32,6 +32,66 @@ public class Medium10T60 {
         //fourSum(param1,0);
         System.out.println("res");
     }
+    //49. Group Anagrams
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String,List<String>> group = new HashMap<>();
+        for(String str:strs){
+            char[] str_list = str.toCharArray();
+            Arrays.sort(str_list);
+            String sorted=new String(str_list);
+            if(!group.containsKey(sorted)){
+                group.put(sorted,new ArrayList<>());
+            }
+            group.get(sorted).add(str);
+        }
+        return new ArrayList<>(group.values());
+    }
+/* Another method
+    public List<List<String>> groupAnagrams(String[] strs) {
+
+        List<List<String>> list = new AbstractList<List<String>>() {
+
+            List<List<String>> resultList = null;
+
+            public int size() {
+                if(resultList == null) {
+                    init();
+                }
+                return resultList.size();
+            }
+
+            public List<String> get(int index) {
+                if(resultList == null) {
+                    init();
+                }
+                return resultList.get(index);
+            }
+
+            private void init() {
+                Map<String, List<String>> resMap = new HashMap<>();
+
+                for(String s : strs) {
+                    char[] arr = new char[26];
+                    for(char ch : s.toCharArray()) {
+                        arr[ch - 97]++;
+                    }
+
+                    String strKey = String.valueOf(arr);
+                    resMap.computeIfAbsent(strKey, k -> new ArrayList<>());
+                    resMap.get(strKey).add(s);
+                }
+
+                resultList = new ArrayList<>(resMap.values().size());
+
+                for(Map.Entry<String, List<String>> mapToList : resMap.entrySet()) {
+                    resultList.add(mapToList.getValue());
+                }
+
+            }
+
+        };
+        return list;
+    }*/
     //48. Rotate Image
     public static void rotate(int[][] matrix) {
         int len = matrix.length;
