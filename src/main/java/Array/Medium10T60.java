@@ -6,7 +6,9 @@ import java.util.*;
 public class Medium10T60 {
     public static void main(String[] args) {
 
-        String[][] param1= {{"5","3",".",".","7",".",".",".","."}
+        int[] params={2,3,5};
+        List<List<Integer>> res = combinationSum(params,8);
+       /* String[][] param1= {{"5","3",".",".","7",".",".",".","."}
                             ,{"6",".",".","1","9","5",".",".","."}
                             ,{".","9","8",".",".",".",".","6","."}
                             ,{"8",".",".",".","6",".",".",".","3"}
@@ -15,7 +17,7 @@ public class Medium10T60 {
                             ,{".","6",".",".",".",".","2","8","."}
                             ,{".",".",".","4","1","9",".",".","5"}
                             ,{".",".",".",".","8",".",".","7","9"}};
-        isValidSudoku(param1);
+        isValidSudoku(param1);*/
         //34. Find First and Last Position of Element in Sorted Array
         //searchRange(param1,8);
         //33. Search in Rotated Sorted Array
@@ -27,6 +29,27 @@ public class Medium10T60 {
         //fourSum(param1,0);
         System.out.println("res");
     }
+    //39. Combination Sum
+    static List<Integer> tempItem = new ArrayList<>();
+    static List<List<Integer>> result = new ArrayList<>();
+    public static List<List<Integer>> combinationSum(int[] c, int target) {
+        comb(c,target,0);
+        return result;
+    }
+    private static void comb(int[] c, int target, int start_index){
+        if(target == 0){
+            result.add(new ArrayList<>(tempItem));
+            return ;
+        }
+        for(int i=start_index; i<c.length; i++){
+            if(c[i]<=target){
+                tempItem.add(c[i]);
+                comb(c, target-c[i], i);
+                tempItem.remove(tempItem.size()-1);
+            }
+        }
+    }
+
 
     //36. Valid Sudoku
     public static boolean isValidSudoku(String[][] board) {
