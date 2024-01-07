@@ -6,9 +6,11 @@ import java.util.*;
 public class Medium10T60 {
     public static void main(String[] args) {
 
-        int[][] duparam = {{1,2,3},{4,5,6},{7,8,9}};
+        int[][] duparam = {{2,5},{4,6},{8,10},{15,18}};
+        int[][] duparam1 = {{1,4},{0,4}};
+        merge(duparam);
         int[] params={7,0,9,6,9,6,1,7,9,0,1,2,9,0,3};
-        rotate(duparam);
+        //rotate(duparam);
         //39. Combination Sum
         //List<List<Integer>> res = combinationSum(params,8);
        /* String[][] param1= {{"5","3",".",".","7",".",".",".","."}
@@ -31,6 +33,49 @@ public class Medium10T60 {
         //int[] param1={1,0,-1,0,-2,2};
         //fourSum(param1,0);
         System.out.println("res");
+    }
+
+    //56. Merge Intervals
+/*  sort() method is lower
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals,Comparator.comparingInt(X->X[0]));
+        List<int[]> result = new ArrayList<>();
+        for(int i=0;i<intervals.length;i++){
+            if(result.size()==0||intervals[i][0]>result.get(result.size()-1)[1]){
+                result.add(intervals[i]);
+            }else{
+                result.get(result.size()-1)[1] = Math.max(result.get(result.size()-1)[1],intervals[i][1]);
+            }
+        }
+        return result.toArray(new int[result.size()][2]);
+    }*/
+    public static int[][] merge(int[][] intervals) {
+        List<int[]> result = new ArrayList();
+        int max_index = Integer.MIN_VALUE;
+        int min_index = Integer.MAX_VALUE;
+        for(int i=0; i< intervals.length;i++){
+            max_index=Math.max(max_index,intervals[i][0]);
+            min_index=Math.min(min_index,intervals[i][0]);
+        }
+        int[]  range_list = new int[max_index+1];
+        for(int i=0; i< intervals.length;i++){
+            range_list[intervals[i][0]]=Math.max(range_list[intervals[i][0]],intervals[i][1]);
+        }
+        int start=min_index,end=min_index;
+        for(int i=0;i<range_list.length;i++){
+            if(range_list[i]==0){
+                continue;
+            }
+            if(i<=end){
+                end=Math.max(end,range_list[i]);
+            }else{
+                result.add(new int[]{start,end});
+                start=i;
+                end=range_list[i];
+            }
+        }
+        result.add(new int[]{start,end});
+        return result.toArray(new int[result.size()][]);
     }
 
     //55. Jump Game

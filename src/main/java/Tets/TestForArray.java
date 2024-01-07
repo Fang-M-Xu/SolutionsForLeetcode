@@ -1,12 +1,18 @@
 package Tets;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TestForArray {
     public static void main(String[] args) {
+
+        Set<int[]> temp = new TreeSet();
+/*        temp.add("1");
+        temp.add("1");
+        temp.add("2");*/
+        temp.add(new int[]{1,4});
+        temp.add(new int[]{1,4});
+        temp.add(new int[]{1,2});
+
 
         for(int i=0;i<3;i++){
             if(i==2){
