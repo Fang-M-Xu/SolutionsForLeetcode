@@ -34,6 +34,40 @@ public class Medium10T60 {
         //fourSum(param1,0);
         System.out.println("res");
     }
+    //59. Spiral Matrix II
+    public int[][] generateMatrix(int n) {
+        int[][] new_list = new int[n][n];
+        int top=0,bottom=n-1,left=0,right=n-1;
+        int k=1;
+        while(top<=bottom&&left<=right){
+            if(top<=bottom){
+                for(int i=left;i<=right;i++){
+                    new_list[top][i]=k++;
+                }
+                top++;
+            }
+            if(left<=right){
+                for(int i=top;i<=bottom;i++){
+                    new_list[i][right]=k++;
+                }
+                right--;
+            }
+            if(top<=bottom){
+                for(int i=right;i>=left;i--){
+                    new_list[bottom][i]=k++;
+                }
+                bottom--;
+            }
+            if(left<=right){
+                for(int i=bottom;i>=top;i--){
+                    new_list[i][left]=k++;
+                }
+                left++;
+            }
+        }
+        return new_list;
+    }
+
     //57. Insert Interval
     public int[][] insert(int[][] intervals, int[] newInterval) {
         List<int[]> result = new ArrayList();
