@@ -34,6 +34,49 @@ public class Medium10T60 {
         //fourSum(param1,0);
         System.out.println("res");
     }
+    //57. Insert Interval
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> result = new ArrayList();
+        if(intervals.length==0&&newInterval.length!=0){
+            int[][] intervals_new = new int[1][2];
+            intervals_new[0]=newInterval;
+            return intervals_new;
+        }
+        List<int[]> intervals_list = new ArrayList<>();
+        intervals_list.add(newInterval);
+        for(int[] interval:intervals){
+            intervals_list.add(interval);
+        }
+
+        int[][] intervals_new = intervals_list.toArray(new int[intervals_list.size()][]);
+
+        int max_index = Integer.MIN_VALUE;
+        int min_index = Integer.MAX_VALUE;
+        for(int i=0; i< intervals_list.size();i++){
+            max_index=Math.max(max_index,intervals_new[i][0]);
+            min_index=Math.min(min_index,intervals_new[i][0]);
+        }
+
+        int[] range_array = new int[max_index+1];
+        for(int i=0; i< intervals_new.length;i++){
+            range_array[intervals_new[i][0]]=Math.max(range_array[intervals_new[i][0]],intervals_new[i][1]);
+        }
+        int start=min_index,end=min_index;
+        for(int i=0;i<range_array.length;i++){
+            if(range_array[i]==0){
+                continue;
+            }
+            if(i<=end){
+                end=Math.max(end,range_array[i]);
+            }else{
+                result.add(new int[]{start,end});
+                start=i;
+                end=range_array[i];
+            }
+        }
+        result.add(new int[]{start,end});
+        return result.toArray(new int[result.size()][]);
+    }
 
     //56. Merge Intervals
 /*  sort() method is lower
