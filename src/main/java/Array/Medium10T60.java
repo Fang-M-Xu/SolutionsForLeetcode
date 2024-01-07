@@ -32,6 +32,24 @@ public class Medium10T60 {
         //fourSum(param1,0);
         System.out.println("res");
     }
+
+    //55. Jump Game
+    public boolean canJump(int[] nums) {
+        int maxJump = 0;
+        int furtherIndex = 0;
+        for(int i=0;i<nums.length;i++){
+            maxJump=Math.max(maxJump,nums[i]+i);
+            if(i==furtherIndex){
+                furtherIndex=maxJump;
+            }
+            if(furtherIndex>=nums.length-1){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     //54. Spiral Matrix-judge the edge position
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> result = new ArrayList<>();
