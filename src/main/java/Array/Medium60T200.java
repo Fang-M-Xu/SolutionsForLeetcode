@@ -8,11 +8,80 @@ public class Medium60T200 {
     public static void main(String[] args) {
 
         //int[][] duparam = {{1,3,1}, {1,5,1}, {4,2,1}};
-        int[][] duparam = {{1,2,3}, {4,5,6}};
+        char[][] duparam = {{'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}};
         int[] param={1,2,3};
-        subsets(param);
+        exist(duparam,"ABCESEEEFS");
         //minPathSum(duparam);
     }
+    //79. Word Search
+    public static boolean exist(char[][] board, String word) {
+        int m=board.length,n=board[0].length;
+        if(m*n<word.length()){
+            return false;
+        }
+        if(!checkWordInborad(board,word)){
+            return false;
+        }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(board[i][j]==word.charAt(0)){
+                    boolean isContain = backtrack79(board,word,i,j,0,new boolean[m][n]);
+                    if(isContain){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    private static boolean checkWordInborad(char[][] board, String word){
+        List<Character> word_array = new ArrayList<>();
+        for(char letter:word.toCharArray()){
+            word_array.add(letter);
+        }
+        for(int i=0;i<board.length;i++){
+            for(int j=0;j<board[0].length;j++){
+                if(word_array.size()==0){
+                    return true;
+                }
+                if(word_array.contains(board[i][j])){
+                    word_array.remove((Character)board[i][j]);
+                }
+            }
+        }
+        if(word_array.size()==0){
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean backtrack79(char[][] board, String word, int row,int col,int wordIndex,boolean[][] flagBoard){
+        if(row<0||row>=board.length||col<0||col>=board[0].length||board[row][col]!=word.charAt(wordIndex)){
+            return false;
+        }
+        if(flagBoard[row][col]){
+            return false;
+        }
+        if(wordIndex==word.length()-1){
+            return true;
+        }
+        flagBoard[row][col] = true;
+        if(backtrack79(board,word,row,col+1,wordIndex+1,flagBoard)){
+            return true;
+        }
+        if(backtrack79(board,word,row,col-1,wordIndex+1,flagBoard)){
+            return true;
+        }
+        if(backtrack79(board,word,row+1,col,wordIndex+1,flagBoard)){
+            return true;
+        }
+        if(backtrack79(board,word,row-1,col,wordIndex+1,flagBoard)){
+            return true;
+        }
+        flagBoard[row][col] = false;// if the four directions don't fit the condition, reset the flag to false.
+        return false;
+    }
+
     //78. Subsets
     public static List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
