@@ -1,14 +1,35 @@
 package Array;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Medium60T200 {
     public static void main(String[] args) {
 
         //int[][] duparam = {{1,3,1}, {1,5,1}, {4,2,1}};
         int[][] duparam = {{1,2,3}, {4,5,6}};
-        int[] param={1,0,2,1,1,0};
-        sortColors(param);
+        int[] param={1,2,3};
+        subsets(param);
         //minPathSum(duparam);
     }
+    //78. Subsets
+    public static List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums);
+        backtrack(result, new ArrayList<Integer>(),nums,0);
+        return result;
+    }
+    private static void backtrack(List<List<Integer>> result,List<Integer> item , int[] nums, int start){
+        result.add(new ArrayList<>(item));
+        for(int i=start;i<nums.length;i++){
+            item.add(nums[i]);
+            backtrack(result,item,nums,i+1);
+            item.remove(item.size()-1);
+        }
+    }
+
+
     //75. Sort Colors
     public static void sortColors(int[] nums) {
         int left=0,right=nums.length-1;
