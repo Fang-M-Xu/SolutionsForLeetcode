@@ -5,8 +5,31 @@ public class Medium60T200 {
 
         //int[][] duparam = {{1,3,1}, {1,5,1}, {4,2,1}};
         int[][] duparam = {{1,2,3}, {4,5,6}};
-        minPathSum(duparam);
+        int[] param={1,0,2,1,1,0};
+        sortColors(param);
+        //minPathSum(duparam);
     }
+    //75. Sort Colors
+    public static void sortColors(int[] nums) {
+        int left=0,right=nums.length-1;
+        for(int i=0; i<=right;i++){
+            if(nums[i]==0){
+                //no need to check if the num is 2 after swap,because no 2 before 0
+                swap(nums,i,left++);
+            }else if(nums[i]==1){
+                continue;
+            }else if(nums[i]==2){
+                //need to check because the new num may be 0
+                swap(nums,i--,right--);
+            }
+        }
+    }
+    private static void swap(int[] nums,int i,int j){
+        int temp = nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+    }
+
     //73. Set Matrix Zeroes
     public void setZeroes(int[][] matrix) {
         boolean row0=false, col0=false;
