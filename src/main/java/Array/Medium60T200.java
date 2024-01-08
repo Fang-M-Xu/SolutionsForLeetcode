@@ -1,18 +1,50 @@
 package Array;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Medium60T200 {
     public static void main(String[] args) {
 
         //int[][] duparam = {{1,3,1}, {1,5,1}, {4,2,1}};
         char[][] duparam = {{'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}};
-        int[] param={1,2,3};
-        exist(duparam,"ABCESEEEFS");
-        //minPathSum(duparam);
+        int[] param={100,4,200,1,3,2};
+        //exist(duparam,"ABCESEEEFS");
+        int res=longestConsecutive(param);
+        System.out.println(res);
     }
+
+
+    //128. Longest Consecutive Sequence
+    public static int longestConsecutive(int[] nums) {
+        if(nums.length==0){
+            return 0;
+        }
+        Set dup_nums=new HashSet();
+        for(int num:nums){
+            dup_nums.add(num);
+        }
+        int max=0;
+        for(int i=0; i<nums.length;i++){
+            if(dup_nums.remove(nums[i])){
+                int start=nums[i];
+                int end=start;
+                int sum=1;
+                while(dup_nums.remove(end+1)){
+                    end++;
+                }
+                sum+=end-start;
+                end=start;
+                while(dup_nums.remove(end-1)){
+                    end--;
+                }
+                sum+=start-end;
+                max=Math.max(max,sum);
+            }
+        }
+        return max;
+    }
+
+
     //79. Word Search
     public static boolean exist(char[][] board, String word) {
         int m=board.length,n=board[0].length;
