@@ -5,15 +5,84 @@ import java.util.*;
 public class Medium60T200 {
     public static void main(String[] args) {
 
+        int[] param={0,0};
+        largestNumber(param);
         //int[][] duparam = {{1,3,1}, {1,5,1}, {4,2,1}};
-        char[][] duparam = {{'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}};
-        int[] param={100,4,200,1,3,2};
-        int[] gas={1,2,3,4,5},cost={3,4,5,1,2};
-        canCompleteCircuit(gas,cost);
+        //char[][] duparam = {{'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}};
+        //int[] param={2,3,-2,4};
+        //int[] gas={1,2,3,4,5},cost={3,4,5,1,2};
+        //maxProduct(param);
+        //canCompleteCircuit(gas,cost);
         //exist(duparam,"ABCESEEEFS");
-        int res=longestConsecutive(param);
-        System.out.println(res);
+        //int res=longestConsecutive(param);
+        //System.out.println(res);
     }
+    //189. Rotate Array
+    public void rotate(int[] nums, int k) {
+        k=k%nums.length;
+        reverse(nums,0,nums.length-k-1);
+        reverse(nums,nums.length-k,nums.length-1);
+        reverse(nums,0,nums.length-1);
+    }
+    private void reverse(int[] nums, int start,int end){
+        int i = start,j=end;
+        while(i<j){
+            int temp = nums[i];
+            nums[i]=nums[j];
+            nums[j]=temp;
+            i++;
+            j--;
+        }
+    }
+
+    //179. Largest Number
+    public static String largestNumber(int[] nums) {
+        String[] strs = new String[nums.length];
+        for(int i=0;i<nums.length;i++){
+            strs[i]=nums[i]+"";
+        }
+        Arrays.sort(strs, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                String i1 = o1+o2;
+                String i2 = o2+o1;
+                return i1.compareTo(i2);
+            }
+        });
+        if (strs[strs.length-1].charAt(0) == '0') return "0";
+        String result = new String();
+        for(String num:strs){
+            result=num+result;
+        }
+        return result;
+
+/*        Map<Integer,Set> bitGroup = new HashMap();
+        for(int num:nums){
+            int len = String.valueOf(num).length();
+            Set<Integer> item=bitGroup.getOrDefault(len,new HashSet<Integer>());
+            item.add(num);
+            bitGroup.put(len,item);
+        }
+        return "";*/
+    }
+
+    //152. Maximum Product Subarray
+    public static int maxProduct(int[] nums) {
+        int max=nums[0],min=nums[0],res=nums[0];
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]<0){
+                int temp=max;
+                max=min;
+                min=temp;
+            }
+            max=Math.max(max,max*nums[i]);
+            min=Math.max(min,min*nums[i]);
+
+            res=Math.max(res,max);
+        }
+        return res;
+    }
+
     //134. Gas Station
     public static int canCompleteCircuit(int[] gas, int[] cost) {
         int totalGas=0,totalCost=0;
@@ -44,6 +113,7 @@ public class Medium60T200 {
         for(int num:nums){
             dup_nums.add(num);
         }
+
         int max=0;
         for(int i=0; i<nums.length;i++){
             if(dup_nums.remove(nums[i])){
