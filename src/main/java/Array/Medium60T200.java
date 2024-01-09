@@ -8,11 +8,32 @@ public class Medium60T200 {
         //int[][] duparam = {{1,3,1}, {1,5,1}, {4,2,1}};
         char[][] duparam = {{'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}};
         int[] param={100,4,200,1,3,2};
+        int[] gas={1,2,3,4,5},cost={3,4,5,1,2};
+        canCompleteCircuit(gas,cost);
         //exist(duparam,"ABCESEEEFS");
         int res=longestConsecutive(param);
         System.out.println(res);
     }
-
+    //134. Gas Station
+    public static int canCompleteCircuit(int[] gas, int[] cost) {
+        int totalGas=0,totalCost=0;
+        for(int i=0;i<gas.length;i++){
+            totalGas+=gas[i];
+            totalCost+=cost[i];
+        }
+        if(totalGas<totalCost){
+            return -1;
+        }
+        int remain=0,station=0;
+        for(int i=0;i<gas.length;i++){
+            remain+=gas[i]-cost[i];
+            if(remain<0){
+                remain=0;
+                station=i+1;
+            }
+        }
+        return station;
+    }
 
     //128. Longest Consecutive Sequence
     public static int longestConsecutive(int[] nums) {
