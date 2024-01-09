@@ -4,9 +4,8 @@ import java.util.*;
 
 public class Medium60T200 {
     public static void main(String[] args) {
-
-        int[] param={0,0};
-        largestNumber(param);
+        int[] param={2,1,1,3};
+        int res=rob(param);
         //int[][] duparam = {{1,3,1}, {1,5,1}, {4,2,1}};
         //char[][] duparam = {{'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}};
         //int[] param={2,3,-2,4};
@@ -15,8 +14,23 @@ public class Medium60T200 {
         //canCompleteCircuit(gas,cost);
         //exist(duparam,"ABCESEEEFS");
         //int res=longestConsecutive(param);
-        //System.out.println(res);
+        System.out.println(res);
     }
+    //198. House Robber
+    public static int rob(int[] nums) {
+        int house_over = nums[0];
+        if(nums.length==1){
+            return house_over;
+        }
+        int house_next = Math.max(nums[0],nums[1]),current_house=house_next;
+        for(int i=2;i<nums.length;i++){
+            current_house=Math.max(nums[i]+house_over,house_next);
+            house_over=house_next;
+            house_next=current_house;
+        }
+        return current_house;
+    }
+
     //189. Rotate Array
     public void rotate(int[] nums, int k) {
         k=k%nums.length;
