@@ -16,6 +16,31 @@ public class Medium60T200 {
         //int res=longestConsecutive(param);
         System.out.println(res);
     }
+    //200. Number of Islands
+    public int numIslands(char[][] grid) {
+        int num=0;
+        char target = '1';
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]==target){
+                    findIsland(grid,i,j,target);
+                    num++;
+                }
+            }
+        }
+        return num;
+    }
+    private void findIsland(char[][] grid,int row,int col,char target){
+        if(row<0||row>=grid.length||col<0||col>=grid[0].length||grid[row][col]!=target){
+            return ;
+        }
+        grid[row][col]='0';
+        findIsland(grid,row+1,col,target);
+        findIsland(grid,row-1,col,target);
+        findIsland(grid,row,col+1,target);
+        findIsland(grid,row,col-1,target);
+    }
+
     //198. House Robber
     public static int rob(int[] nums) {
         int house_over = nums[0];
