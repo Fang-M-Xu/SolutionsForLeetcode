@@ -10,6 +10,23 @@ public class Medium200T600 {
         productExceptSelf(param);
         //System.out.println(res);
     }
+    //287. Find the Duplicate Number
+    public int findDuplicate(int[] nums) {
+        int slow =nums[0];
+        int fast =nums[0];
+        while(slow!=fast){
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }
+
+        int slow2=nums[0];
+        while(slow!=slow2){
+            slow=nums[slow];
+            slow2=nums[slow2];
+        }
+        return slow2;
+    }
+
     //238. Product of Array Except Self
     public static int[] productExceptSelf1(int[] nums) {
         int len = nums.length;
