@@ -1,14 +1,50 @@
 package Array;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Random;
 
 public class Medium200T600 {
     public static void main(String[] args) {
-        int[] param = {3,2,3,1,2,4,5,5,6};
-        int res=findKthLargest(param,4 );
-        System.out.println(res);
+        int[] param = {1,2,3,4};
+        productExceptSelf(param);
+        //System.out.println(res);
     }
+    //238. Product of Array Except Self
+    public static int[] productExceptSelf1(int[] nums) {
+        int len = nums.length;
+        int[] preArray = new int[len];
+        int[] suffArray = new int[len];
+        int[] result =  new int[len];
+        preArray[0]=1;
+        suffArray[len-1]=1;
+        for(int i =1;i<len;i++){
+            preArray[i]=nums[i-1]*preArray[i-1];
+        }
+        for(int i =len-2;i>=0;i--){
+            suffArray[i]=nums[i+1]*suffArray[i+1];
+        }
+        for(int i =0;i<len;i++){
+            result[i]=preArray[i]*suffArray[i];
+        }
+        return result;
+    }
+    //extra space complexity-O(1)
+    public static int[] productExceptSelf(int[] nums) {
+        int len = nums.length;
+        int[] result =  new int[len];
+        Arrays.fill(result,1);
+        for(int i =1;i<len;i++){
+            result[i]=nums[i-1]*result[i-1];
+        }
+        int lastNum = 1;
+        for(int i =len-1;i>=0;i--){
+            result[i] = lastNum*result[i];
+            lastNum =  nums[i]*lastNum;
+        }
+        return result;
+    }
+
     //215. Kth Largest Element in an Array
     //QuickSelect Algorithm-more runtime
     public static int findKthLargest2(int[] nums, int k) {
