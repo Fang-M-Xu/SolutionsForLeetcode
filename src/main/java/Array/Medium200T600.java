@@ -6,10 +6,31 @@ import java.util.Random;
 
 public class Medium200T600 {
     public static void main(String[] args) {
-        int[] param = {1,2,3,4};
-        productExceptSelf(param);
+        int[] param = {1,2,5};
+        coinChange(param,11);
         //System.out.println(res);
     }
+    //322. Coin Change
+    public static int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount+1];
+        for(int i=0;i<dp.length;i++){
+            dp[i]=amount+1;
+        }
+        dp[0]=0;
+        for(int i=1;i<=amount;i++){
+            for(int coin:coins){
+                if(i>=coin){
+                    dp[i]=Math.min(dp[i],1+dp[i-coin]);
+                }
+            }
+        }
+        if(dp[amount]!=amount+1){
+            return dp[amount];
+        }else{
+            return -1;
+        }
+    }
+
     //287. Find the Duplicate Number
     public int findDuplicate(int[] nums) {
         int slow =nums[0];
