@@ -1,15 +1,44 @@
 package Array;
 
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.Random;
+import java.util.*;
 
 public class Medium200T600 {
     public static void main(String[] args) {
-        int[] param = {1,2,5};
-        coinChange(param,11);
+        int[] param = {4,1,-1,2,-1,2,3};
+        topKFrequent(param,2);
         //System.out.println(res);
     }
+    //
+
+    //347. Top K Frequent Elements
+    public static int[] topKFrequent(int[] nums, int k) {
+        if(nums.length==0||nums.length==k){
+            return nums;
+        }
+        Map<Integer,Integer> freqs = new HashMap<>();
+        for(int num:nums){
+            freqs.put(num,freqs.getOrDefault(num,0)+1);
+        }
+        TreeMap<Integer,List<Integer>> sort_freq = new TreeMap<>();
+        for(int num:freqs.keySet()){
+            int freq = freqs.get(num);
+            if(!sort_freq.containsKey(freq)){
+                sort_freq.put(freq,new ArrayList<>());
+            }
+            sort_freq.get(freq).add(num);
+        }
+        List<Integer> result = new ArrayList<>();
+        while(result.size()<k){
+            Map.Entry<Integer, List<Integer>> entry =sort_freq.pollLastEntry();
+            if(entry!=null){
+                result.addAll(entry.getValue());
+            }
+        }
+
+        return result.stream().mapToInt(i->i).toArray();
+    }
+
+
     //322. Coin Change
     public static int coinChange(int[] coins, int amount) {
         int[] dp = new int[amount+1];
