@@ -10,7 +10,22 @@ public class Medium200T600 {
     }
     //396. Rotate Function
     public int maxRotateFunction(int[] nums) {
-        return 1;
+        if(nums.length == 1 || nums.length == 0){
+            return 0;
+        }
+        int max=0,sum=0,len=nums.length;
+        int tempF = 0;
+        for(int i=0;i<nums.length;i++){
+            sum+=nums[i];
+            tempF+=i*nums[i];
+        }
+
+        max=tempF;
+        for(int i=1;i<nums.length;i++){
+            tempF=tempF+sum-len*nums[len-i];
+            max=Math.max(max,tempF);
+        }
+        return max;
     }
 
     //347. Top K Frequent Elements
