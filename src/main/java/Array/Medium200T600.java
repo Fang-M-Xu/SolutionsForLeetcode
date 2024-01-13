@@ -8,7 +8,10 @@ public class Medium200T600 {
         topKFrequent(param,2);
         //System.out.println(res);
     }
-    //
+    //396. Rotate Function
+    public int maxRotateFunction(int[] nums) {
+        return 1;
+    }
 
     //347. Top K Frequent Elements
     public static int[] topKFrequent(int[] nums, int k) {
