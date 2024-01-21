@@ -1,13 +1,109 @@
 package Array;
 
+
 import java.util.*;
 
 public class Medium200T600 {
     public static void main(String[] args) {
         int[] param = {4,1,-1,2,-1,2,3};
-        topKFrequent(param,2);
+        List<List<String>> equations = new ArrayList<>();
+
+        List<String> e1=new ArrayList<>();
+        e1.add("a");
+        e1.add("b");
+        equations.add(e1);
+
+        List<String> e2=new ArrayList<>();
+        e2.add("b");
+        e2.add("c");
+        equations.add(e2);
+
+        List<String> e3=new ArrayList<>();
+        e3.add("bc");
+        e3.add("cd");
+        equations.add(e3);
+
+        double[] values = {1.5,2.5,5.0};
+        List<List<String>> queries = new ArrayList<>();
+
+        List<String> q1=new ArrayList<>();
+        q1.add("a");
+        q1.add("c");
+        queries.add(q1);
+
+        List<String> q2=new ArrayList<>();
+        q2.add("c");
+        q2.add("b");
+        queries.add(q2);
+
+        List<String> q3=new ArrayList<>();
+        q3.add("bc");
+        q3.add("cd");
+        queries.add(q3);
+
+        List<String> q4=new ArrayList<>();
+        q4.add("cd");
+        q4.add("bc");
+        queries.add(q4);
+
+        calcEquation(equations,values,queries);
         //System.out.println(res);
     }
+    //399. Evaluate Division
+    //a/d = a/b*b/c*c/d
+    public static double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        Map<String,Map<String,Double>> matrix = buildMatrix(equations,values);
+        double[] result = new double[queries.size()];
+        int count = 0;
+        for(List<String> query:queries){
+            String dividend = query.get(0);
+            String divisor = query.get(1);
+
+            if(!matrix.containsKey(dividend)||!matrix.containsKey(divisor)){
+                result[count++] = -1.0;
+            }else{
+                double[] ans = {-1.0};
+                List<String> visited = new ArrayList<>();
+                dfs(dividend,divisor,visited,1.0,matrix,ans);
+                result[count++] = ans[0];
+            }
+        }
+        return result;
+    }
+    public static Map<String,Map<String,Double>> buildMatrix(List<List<String>> equations, double[] values){
+        Map<String,Map<String,Double>> result = new HashMap<>();
+        for(int i=0;i<values.length;i++){
+            String dividend = equations.get(i).get(0);
+            String divisor = equations.get(i).get(1);
+
+            Map<String,Double> item_dividend=result.getOrDefault(dividend, new HashMap<>());
+            Map<String,Double> item_divisor=result.getOrDefault(divisor, new HashMap<>());
+            item_dividend.put(divisor,values[i]);
+            item_divisor.put(dividend,1.0/values[i]);
+            result.put(dividend,item_dividend);
+            result.put(divisor,item_divisor);
+        }
+        return result;
+    }
+
+    public static void dfs(String middle_item,String divisor,List<String> visited,double temp_diff, Map<String,Map<String,Double>> matrix,double[] temp_res ){
+        if(visited.contains(middle_item)){
+            return;
+        }
+        visited.add(middle_item);
+        if(middle_item.equals(divisor)){
+            temp_res[0]=temp_diff;
+            return;
+        }
+
+        for(Map.Entry<String, Double> entry: matrix.get(middle_item).entrySet()){
+            String temp_divisor = entry.getKey();
+            double diff = entry.getValue();
+            dfs(temp_divisor,divisor,visited,temp_diff*diff,matrix, temp_res);
+        }
+    }
+
+
     //396. Rotate Function
     public int maxRotateFunction(int[] nums) {
         if(nums.length == 1 || nums.length == 0){
