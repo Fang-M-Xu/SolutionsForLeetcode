@@ -51,7 +51,17 @@ public class Medium200T600 {
     }
     //442. Find All Duplicates in an Array
     public List<Integer> findDuplicates(int[] nums) {
-        return null;
+        List<Integer> result = new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            int index = Math.abs(nums[i])-1;
+            int value = nums[index];
+            if(value<0){
+                result.add(index+1);
+            }else{
+                nums[index]*=-1;
+            }
+        }
+        return result;
     }
 
 
