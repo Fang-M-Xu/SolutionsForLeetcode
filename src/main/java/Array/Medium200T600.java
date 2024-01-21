@@ -46,9 +46,15 @@ public class Medium200T600 {
         q4.add("bc");
         queries.add(q4);
 
-        calcEquation(equations,values,queries);
+        //calcEquation(equations,values,queries);
         //System.out.println(res);
     }
+    //442. Find All Duplicates in an Array
+    public List<Integer> findDuplicates(int[] nums) {
+        return null;
+    }
+
+
     //399. Evaluate Division
     //a/d = a/b*b/c*c/d
     public static double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
