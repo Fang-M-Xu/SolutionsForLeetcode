@@ -49,6 +49,22 @@ public class Medium200T600 {
         //calcEquation(equations,values,queries);
         //System.out.println(res);
     }
+    //452. Minimum Number of Arrows to Burst Balloons
+    public int findMinArrowShots(int[][] points) {
+        Arrays.sort(points,(a,b)->a[1]-b[1]);
+        int account=1;
+        int arrow=points[0][1];
+        for(int i=1;i<points.length;i++){
+            if(points[i][0]<=arrow){
+                continue;
+            }
+            account++;
+            arrow=points[i][1];
+        }
+        return account;
+    }
+
+
     //442. Find All Duplicates in an Array
     public List<Integer> findDuplicates(int[] nums) {
         List<Integer> result = new ArrayList<>();
