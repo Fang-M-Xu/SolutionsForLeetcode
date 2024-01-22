@@ -46,12 +46,41 @@ public class Medium200T600 {
         q4.add("bc");
         queries.add(q4);
 
+        int[] parameter={4,6,7,7};
+        findSubsequences(parameter);
+
         //calcEquation(equations,values,queries);
         //System.out.println(res);
     }
+    //491. Non-decreasing Subsequences
+    public static List<List<Integer>> findSubsequences(int[] nums) {
+        if(nums.length<=1){
+            return new ArrayList<>();
+        }
+        if(nums.length==2&&nums[0]>nums[1]){
+            return new ArrayList<>();
+        }
+        Set<List<Integer>> result = new HashSet<>();
+        List<Integer> item = new ArrayList<>();
+        buildSequences(nums,0, result,item,nums.length);
+        return new ArrayList<>(result);
+    }
+    public static void buildSequences(int[] nums,int start,Set<List<Integer>> result,List<Integer> items,int len){
+        if(items.size()>=2){
+            result.add(new ArrayList<>(items));
+        }
+        for(int i=start;i<len;i++) {
+            if (items.size()==0||nums[i] >= items.get(items.size()-1)) {
+                items.add(nums[i]);
+                buildSequences(nums, i + 1, result, items, len);
+                items.remove(items.size()-1);
+            }
+        }
+    }
+
     //452. Minimum Number of Arrows to Burst Balloons
-    public int findMinArrowShots(int[][] points) {
-        Arrays.sort(points,(a,b)->a[1]-b[1]);
+    public static int findMinArrowShots(int[][] points) {
+        Arrays.sort(points,(a,b)->Integer.compare(a[1],b[1]));
         int account=1;
         int arrow=points[0][1];
         for(int i=1;i<points.length;i++){
