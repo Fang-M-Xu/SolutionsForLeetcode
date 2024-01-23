@@ -55,9 +55,36 @@ public class Medium200T600 {
 
     //529. Minesweeper
     public char[][] updateBoard(char[][] board, int[] click) {
-        return null;
+        int row=click[0],col=click[1];
+        if(board[row][col]=='M'){
+            board[row][col]='X';
+            return board;
+        }
+        backTrack(board,row,col);
+        return board;
     }
-    
+    public void backTrack(char[][] board, int row,int col){
+        if(row<0||col<0||row>=board.length||col>=board[0].length||board[row][col]!='E'){
+            return;
+        }
+        int[][] neighbors = {{row-1,col-1},{row-1,col},{row-1,col+1},{row,col-1},{row,col+1},{row+1,col-1},{row+1,col},{row+1,col+1}};
+        board[row][col]='0';
+        for(int[] neighbor:neighbors){
+            if(neighbor[0]<0||neighbor[0]>=board.length||neighbor[1]<0||neighbor[1]>=board[0].length){
+                continue;
+            }
+            if(board[neighbor[0]][neighbor[1]]=='M'){
+                board[row][col]++;
+            }
+        }
+        if(board[row][col]!='0'){
+            return;
+        }
+        board[row][col]='B';
+        for(int[] neighbor:neighbors){
+            backTrack(board,neighbor[0],neighbor[1]);
+        }
+    }
 
      //491. Non-decreasing Subsequences
     public static List<List<Integer>> findSubsequences(int[] nums) {
