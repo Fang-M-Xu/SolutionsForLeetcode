@@ -4,6 +4,18 @@ import java.util.*;
 
 public class TestForArray {
     public static void main(String[] args) {
+        Random rand=new Random();
+        int[] nums = {1,3};
+        // no numbers to pick!
+        int n = rand.nextInt(4);
+        for (int i = 0; i < nums.length; i++) {
+            if (n < nums[i])
+                System.out.println(i);
+        }
+
+        System.out.println("fine");
+
+
 
         Set<int[]> temp = new TreeSet();
 /*        temp.add("1");

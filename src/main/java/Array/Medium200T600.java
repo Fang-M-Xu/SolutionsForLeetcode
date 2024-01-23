@@ -52,7 +52,14 @@ public class Medium200T600 {
         //calcEquation(equations,values,queries);
         //System.out.println(res);
     }
-    //491. Non-decreasing Subsequences
+
+    //529. Minesweeper
+    public char[][] updateBoard(char[][] board, int[] click) {
+        return null;
+    }
+    
+
+     //491. Non-decreasing Subsequences
     public static List<List<Integer>> findSubsequences(int[] nums) {
         if(nums.length<=1){
             return new ArrayList<>();
