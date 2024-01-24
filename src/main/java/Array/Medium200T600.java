@@ -52,10 +52,58 @@ public class Medium200T600 {
         timePoints.add("00:00");
         timePoints.add("23:59");
         timePoints.add("00:00");
-        findMinDifference(timePoints);
+        //findMinDifference(timePoints);
+        int[] par={1,1,2,2,3};
+        singleNonDuplicate(par);
         //calcEquation(equations,values,queries);
         //System.out.println(res);
     }
+    //540. Single Element in a Sorted Array
+    public static int singleNonDuplicate(int[] nums) {
+        if(nums.length==1){
+            return nums[0];
+        }
+        int left=0,right=nums.length-1;
+        while(left<right){
+            int mid=left+(right-left)/2;
+            if(nums[mid]==nums[mid+1]){
+                mid=mid-1;
+            }
+            if((mid-left+1)%2!=0){
+                right=mid;
+            }else{
+                left=mid+1;
+            }
+        }
+        return nums[left];
+        /* first thought,did not pass the test
+        if(nums.length==1){
+            return nums[0];
+        }
+        int start=0;
+        if(nums[0]==0){
+            if(nums[0]!=nums[1]){
+                return 0;
+            }else{
+                start=1;
+            }
+        }else{
+            for(int i=start;i<nums.length-1;i++){
+                if(Math.abs(nums[i])==Math.abs(nums[i+1])){
+                    nums[i]*=-1;
+                    nums[i+1]*=-1;
+                }
+            }
+            for(int i=start;i<nums.length;i++){
+                if(nums[i]>=0){
+                    return nums[i];
+                }
+            }
+        }
+        return nums[0];*/
+    }
+
+
     //539. Minimum Time Difference
     public static int findMinDifference(List<String> timePoints) {
         //without Arrays.sort
