@@ -47,11 +47,60 @@ public class Medium200T600 {
         queries.add(q4);
 
         int[] parameter={4,6,7,7};
-        findSubsequences(parameter);
-
+        //findSubsequences(parameter);
+        List<String> timePoints = new ArrayList<String>();
+        timePoints.add("00:00");
+        timePoints.add("23:59");
+        timePoints.add("00:00");
+        findMinDifference(timePoints);
         //calcEquation(equations,values,queries);
         //System.out.println(res);
     }
+    //539. Minimum Time Difference
+    public static int findMinDifference(List<String> timePoints) {
+        //without Arrays.sort
+        boolean[] temp=new boolean[60*24];
+        for(int i=0;i<timePoints.size();i++){
+            String[] hourMin = timePoints.get(i).split(":");
+            int minValue= Integer.parseInt(hourMin[0])*60+Integer.parseInt(hourMin[1]);
+            if(temp[minValue]){
+                return 0;
+            }
+            temp[minValue]=true;
+        }
+
+        int min = Integer.MAX_VALUE;
+        int previous = 0,first=-1;
+
+        for(int i=0;i<temp.length;i++){
+            if(temp[i]){
+                if(first==-1){
+                    first=i;
+                }else {
+                    min = Math.min(min, i - previous);
+                }
+                previous=i;
+            }
+        }
+        min=Math.min(min,first-previous+60*24);
+        return min;
+
+/*        int[] temp = new int[timePoints.size()];
+        int i=0;
+        for(String timePoint:timePoints){
+            String[] hourMin = timePoint.split(":");
+            int minValue= Integer.parseInt(hourMin[0])*60+Integer.parseInt(hourMin[1]);
+            temp[i++]=minValue;
+        }
+        Arrays.sort(temp);
+        int min=Integer.MAX_VALUE;
+        for(int j=1;j<temp.length;j++){
+            min=Math.min(min,temp[j]-temp[j-1]);
+        }
+        min=Math.min(min,temp[0]-temp[temp.length-1]+24*60);
+        return min;*/
+    }
+
 
     //529. Minesweeper
     public char[][] updateBoard(char[][] board, int[] click) {
