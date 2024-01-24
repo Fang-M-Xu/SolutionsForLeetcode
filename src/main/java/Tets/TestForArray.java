@@ -4,6 +4,9 @@ import java.util.*;
 
 public class TestForArray {
     public static void main(String[] args) {
+        System.out.println(3/2);
+
+
         Random rand=new Random();
         int[] nums = {1,3};
         // no numbers to pick!

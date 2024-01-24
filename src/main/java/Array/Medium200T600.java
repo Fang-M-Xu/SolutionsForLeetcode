@@ -53,11 +53,35 @@ public class Medium200T600 {
         timePoints.add("23:59");
         timePoints.add("00:00");
         //findMinDifference(timePoints);
-        int[] par={1,1,2,2,3};
-        singleNonDuplicate(par);
+        int[] par={1,-1,0};
+        //singleNonDuplicate(par);
+        subarraySum(par,0);
         //calcEquation(equations,values,queries);
         //System.out.println(res);
     }
+    //658. Find K Closest Elements
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        return null;
+    }
+
+    //560. Subarray Sum Equals K
+    public static int subarraySum(int[] nums, int k) {
+        Map<Integer,Integer> sumFlags = new HashMap<>();
+        sumFlags.put(0,1);
+        int currSum = 0;
+        int account = 0;
+        for(int i=0;i<nums.length;i++){
+            currSum+=nums[i];
+            int diff=currSum-k;
+            if(sumFlags.containsKey(diff)){
+                account+=sumFlags.get(diff);
+            }
+            sumFlags.put(currSum,sumFlags.getOrDefault(currSum,0)+1);
+        }
+        return account;
+    }
+
+
     //540. Single Element in a Sorted Array
     public static int singleNonDuplicate(int[] nums) {
         if(nums.length==1){
