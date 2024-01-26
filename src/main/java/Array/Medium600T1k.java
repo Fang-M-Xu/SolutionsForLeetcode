@@ -1,8 +1,6 @@
 package Array;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class Medium600T1k {
 
@@ -10,7 +8,31 @@ public class Medium600T1k {
         int[] para = {1,2,3,4,5};
         findClosestElements(para,4,3);
     }
-    //
+    //811. Subdomain Visit Count
+    public List<String> subdomainVisits(String[] cpdomains) {
+        List<String> result = new ArrayList<>();
+        Map<String,Integer> cpdomains_map = new HashMap<>();
+        for(String cpdomain:cpdomains){
+            String[] cpdomain_kv = cpdomain.split(" ");
+            int account = Integer.valueOf(cpdomain_kv[0]);
+            cpdomains_map.put(cpdomain_kv[1],cpdomains_map.getOrDefault(cpdomain_kv[1],0)+account);
+            String second_dom = cpdomain_kv[1].substring(cpdomain_kv[1].indexOf(".")+1);
+            cpdomains_map.put(second_dom,cpdomains_map.getOrDefault(second_dom,0)+account);
+
+            if(second_dom.contains(".")){
+                String last = second_dom.substring(second_dom.indexOf(".")+1);
+                cpdomains_map.put(last,cpdomains_map.getOrDefault(last,0)+account);
+            }
+
+        }
+        for(Map.Entry<String,Integer> entry:cpdomains_map.entrySet()){
+            StringBuilder res_item = new StringBuilder();
+            res_item.append(entry.getValue()+" "+entry.getKey());
+            result.add(res_item.toString());
+        }
+
+        return result;
+    }
 
 
 

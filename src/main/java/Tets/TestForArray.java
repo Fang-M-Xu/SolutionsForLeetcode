@@ -5,7 +5,8 @@ import java.util.*;
 public class TestForArray {
     public static void main(String[] args) {
         System.out.println(3/2);
-
+        System.out.println("doucms.coam.casd".indexOf("."));
+        System.out.println("doucms.coam.casd".substring(6));
 
         Random rand=new Random();
         int[] nums = {1,3};
