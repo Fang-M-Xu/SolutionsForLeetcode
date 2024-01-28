@@ -8,6 +8,22 @@ public class Medium600T1k {
         int[] para = {30,11,23,4,20};
         minEatingSpeed(para,6);
     }
+    //881. Boats to Save People
+    public int numRescueBoats(int[] people, int limit) {
+        Arrays.sort(people);
+        int left=0,right=people.length-1;
+        int account=0;
+        while(left<=right){
+            if(people[left]+people[right]<=limit){
+                left++;
+            }
+            right--;
+            account++;
+        }
+        return account;
+    }
+
+
     //875. Koko Eating Bananas
     //this should has more than one answers
     public static int minEatingSpeed(int[] piles, int h) {
