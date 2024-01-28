@@ -5,8 +5,50 @@ import java.util.*;
 public class Medium600T1k {
 
     public static void main(String[] args) {
-        int[] para = {0,2,0,2,1,2,3,4,4,1};
-        longestMountain(para);
+        int[] para = {0,0,1,0,1,1,0,0,0};
+        maxDistToClosest(para);
+    }
+    //849. Maximize Distance to Closest Person
+    public static int maxDistToClosest(int[] seats) {
+        //even - get smaller one,odd-get middle one
+        int maxDistance=0;
+        int prePosition=-1;
+        for(int i=0;i<seats.length;i++) {
+            if(seats[i]==1){
+                if(prePosition==-1){
+                    maxDistance=i;
+                }else{
+                    maxDistance=Math.max(maxDistance,(i-prePosition)/2);
+                }
+                prePosition=i;
+            }
+        }
+        maxDistance=Math.max(maxDistance,seats.length-1-prePosition);
+        return maxDistance;
+
+/*   first thought
+        int maxDistance=0;
+        int prePosition=-1;
+        for(int i=0;i<seats.length;i++){
+            int distance = 0;
+            if(prePosition==-1){
+                prePosition=i;
+            }else if(seats[i]==1&&prePosition!=-1){
+                if(seats[prePosition]==0){
+                    distance=i-prePosition;
+                }else{
+                    distance=(i-prePosition)/2;
+                }
+                prePosition=i;
+            }else if(i==seats.length-1&&seats[i]==0){
+                distance=i-prePosition;
+            }
+            maxDistance= Math.max(maxDistance,distance);
+        }
+        if(maxDistance==0){
+            return seats.length-1;
+        }
+        return maxDistance;*/
     }
 
     //845. Longest Mountain in Array
