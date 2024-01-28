@@ -7,6 +7,8 @@ public class TestForArray {
         System.out.println(3/2);
         System.out.println("doucms.coam.casd".indexOf("."));
         System.out.println("doucms.coam.casd".substring(6));
+        System.out.println(Math.sqrt(5));
+
 
         Random rand=new Random();
         int[] nums = {1,3};

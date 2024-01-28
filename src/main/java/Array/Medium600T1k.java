@@ -5,9 +5,111 @@ import java.util.*;
 public class Medium600T1k {
 
     public static void main(String[] args) {
-        int[] para = {1,2,3,4,5};
-        findClosestElements(para,4,3);
+        int[] para = {2,4,5,10};
+        //numFactoredBinaryTrees(para);
     }
+    //835. Image Overlap
+    public int largestOverlap(int[][] img1, int[][] img2) {
+        //Method2-faster
+        int N=img1.length;
+        int[][] account = new int[2*N][2*N];
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                if(img1[i][j]==1){
+                    for(int m=0;m<N;m++){
+                        for(int n=0;n<N;n++){
+                            if(img2[m][n]==1){
+                                account[i-m][j-n]++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        int max=0;
+        for(int i=0;i<2*N;i++){
+            for(int j=0;j<2*N;j++){
+                max = Math.max(max,account[i][j]);
+            }
+        }
+        return max;
+
+        /*    method1-time lower
+        int result =0;
+        int K = img1.length;
+        for(int m=1-K;m<K;m++){
+            for(int n=1-K;n<K;n++){
+                result=Math.max(result,overlapAccount(img1,img2,m,n,K));
+            }
+        }
+        return result;*/
+    }
+    //method1-time lower
+/*    public int overlapAccount(int[][] img1, int[][] img2,int m,int n,int K){
+            int account=0;
+            for(int i=0;i<K;i++){
+                for(int j=0;j<K;j++){
+                    if(i-m>=0&&i-m<K&&j-n>=0&&j-n<K){
+                        if(img1[i][j]==img2[i-m][j-n]&&img1[i][j]==1){
+                            account++;
+                        }
+                    }
+                }
+            }
+            return account;
+    }*/
+
+
+    //823. Binary Trees With Factors
+    //public static int numFactoredBinaryTrees(int[] arr) {
+/*  study later
+      Map<Integer,Long> account = new HashMap<>();
+        Arrays.sort(arr);
+        return 1;
+        Arrays.sort(arr);
+        int ans =0;
+        HashMap<Integer, Long> map = new HashMap<>();
+
+        for(int x:arr)
+        {
+            long ways =1;
+            int max = (int)Math.sqrt(x);
+
+            for(int j = 0,left=arr[0];left<=max;left=arr[++j])
+            {
+                if(x%left!=0)   continue;
+                int right =x/left;
+                if(map.containsKey(right))
+                {
+                    ways = (ways+map.get(left)*map.get(right)*(left==right?1:2))%mod;
+                }
+            }
+            map.put(x,ways);
+            ans=(int)(ans+ways)%mod;
+        }
+        return ans;*/
+
+        /*Lower
+        Map<Integer,Long> account = new HashMap<>();
+        Arrays.sort(arr);
+        long len = 0L;
+
+        for(int i=0;i<arr.length;i++){
+            account.put(arr[i],1L);
+            for(int j=0;j<arr.length;j++){
+                if(arr[j]>=arr[i]) break;
+                if(arr[i]%arr[j]==0&&account.containsKey(arr[i]/arr[j])){
+                    account.put(arr[i],account.get(arr[j])*account.get(arr[i]/arr[j])+account.get(arr[i]));
+                }
+            }
+        }
+        for(Map.Entry<Integer,Long> entry:account.entrySet()){
+            len=(len+entry.getValue())%1000000007;
+        }
+        return (int)len;*/
+    //}
+
+
     //811. Subdomain Visit Count
     public List<String> subdomainVisits(String[] cpdomains) {
         List<String> result = new ArrayList<>();
