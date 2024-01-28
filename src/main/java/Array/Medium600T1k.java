@@ -5,9 +5,48 @@ import java.util.*;
 public class Medium600T1k {
 
     public static void main(String[] args) {
-        int[] para = {2,4,5,10};
-        //numFactoredBinaryTrees(para);
+        int[] para = {0,2,0,2,1,2,3,4,4,1};
+        longestMountain(para);
     }
+
+    //845. Longest Mountain in Array
+    public static int longestMountain(int[] arr) {
+        if(arr.length<3){
+            return 0;
+        }
+        int len=0;
+        for(int i=1;i<arr.length-1;i++){
+            if(arr[i]>arr[i-1]&&arr[i]>arr[i+1]){
+                int left = leftMountain(arr, i-1);
+                int right = rightMountain(arr, i+1);
+                len = Math.max(len, right - left + 1);
+            }
+        }
+        return len;
+    }
+    public static int leftMountain(int[] arr, int right){
+        int count=right;
+        for(int i=right;i>0;i--){
+            if(arr[i]>arr[i-1]){
+                return i-1;
+            }else{
+                break;
+            }
+        }
+        return count;
+    }
+    public static int rightMountain(int[] arr, int left){
+        int count=left;
+        for(int i=left;i<arr.length-1;i++){
+            if(arr[i]>arr[i+1]){
+                count=i+1;
+            }else{
+                break;
+            }
+        }
+        return count;
+    }
+
     //835. Image Overlap
     public int largestOverlap(int[][] img1, int[][] img2) {
         //Method2-faster
