@@ -8,6 +8,23 @@ public class Medium600T1k {
         int[] para = {0,0,1,0,1,1,0,0,0};
         maxDistToClosest(para);
     }
+    //852. Peak Index in a Mountain Array
+    public int peakIndexInMountainArray(int[] arr) {
+        int left=0,right=arr.length;
+        while(left<right){
+            int middle=left+(right-left)/2;
+            if(arr[middle-1]<arr[middle]&&arr[middle+1]<arr[middle]){
+                return middle;
+            }
+            if(arr[middle-1]>arr[middle]){
+                right=middle;
+            }else if(arr[middle+1]>arr[middle]){
+                left=middle+1;
+            }
+        }
+        return left;
+    }
+
     //849. Maximize Distance to Closest Person
     public static int maxDistToClosest(int[] seats) {
         //even - get smaller one,odd-get middle one
