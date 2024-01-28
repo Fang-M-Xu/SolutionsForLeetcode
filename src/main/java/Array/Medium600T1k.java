@@ -5,9 +5,30 @@ import java.util.*;
 public class Medium600T1k {
 
     public static void main(String[] args) {
-        int[] para = {0,0,1,0,1,1,0,0,0};
-        maxDistToClosest(para);
+        int[] para = {30,11,23,4,20};
+        minEatingSpeed(para,6);
     }
+    //875. Koko Eating Bananas
+    //this should has more than one answers
+    public static int minEatingSpeed(int[] piles, int h) {
+        Arrays.sort(piles);
+        int left=1,right=piles[piles.length-1];
+        while(left<right){
+            int sumK=0;
+            int middle=left+(right-left)/2;
+            for(int i=0;i<piles.length;i++){
+                sumK+=Math.ceil(1.0*piles[i]/middle);
+            }
+            if(sumK>h){
+                left=middle+1;
+            }else if(sumK<=h){
+                right=middle;
+            }
+        }
+        return left;
+    }
+
+
     //852. Peak Index in a Mountain Array
     public int peakIndexInMountainArray(int[] arr) {
         int left=0,right=arr.length;
