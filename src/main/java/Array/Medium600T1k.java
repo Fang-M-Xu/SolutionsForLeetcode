@@ -5,9 +5,49 @@ import java.util.*;
 public class Medium600T1k {
 
     public static void main(String[] args) {
-        int[] para = {30,11,23,4,20};
-        minEatingSpeed(para,6);
+        int[] para = {3,3,3,1,2,1,1,2,3,3,4};
+        totalFruit(para);
     }
+    //904. Fruit Into Baskets
+    public static int totalFruit(int[] fruits) {
+        //faster
+        int pre1=-1,pre2=-1;
+        int preCount=0;
+        int currMax=0;
+        int max=0;
+        for(int fruit:fruits){
+            if(pre1==fruit||pre2==fruit){
+                currMax++;
+            }else{
+                max=Math.max(max,currMax);
+                currMax=preCount+1;
+            }
+            if(pre1!=fruit){
+                pre2=pre1;
+                pre1=fruit;
+                preCount=1;
+            }else{
+                preCount++;
+            }
+        }
+        max=Math.max(max,currMax);
+        return max;
+
+/*        Map<Integer,Integer> fruitsType=new HashMap<>();
+        int left=0;
+        int len=0;
+        for(int i=0;i<fruits.length;i++){
+            fruitsType.put(fruits[i],fruitsType.getOrDefault(fruits[i],0)+1);
+            while(fruitsType.size()>2){
+                fruitsType.put(fruits[left],fruitsType.getOrDefault(fruits[left],0)-1);
+                fruitsType.remove(fruits[left],0);
+                left++;
+            }
+            len=Math.max(len,i-left+1);
+        }
+        return len;*/
+    }
+
     //881. Boats to Save People
     public int numRescueBoats(int[] people, int limit) {
         Arrays.sort(people);
