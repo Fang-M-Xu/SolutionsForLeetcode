@@ -4,6 +4,7 @@ import java.util.*;
 
 public class TestForArray {
     public static void main(String[] args) {
+
         System.out.println(5/2);
         System.out.println("doucms.coam.casd".indexOf("."));
         System.out.println("doucms.coam.casd".substring(6));

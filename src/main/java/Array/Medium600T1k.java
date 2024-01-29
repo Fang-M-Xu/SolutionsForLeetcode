@@ -5,9 +5,65 @@ import java.util.*;
 public class Medium600T1k {
 
     public static void main(String[] args) {
-        int[] para = {3,3,3,1,2,1,1,2,3,3,4};
-        totalFruit(para);
+        int[] para = {5,2,3,1};
+        sortArray(para);
     }
+    //912. Sort an Array
+    //7 methods
+
+    //2.
+
+    //1.quick sort-took too long time,so pass this method
+    public static int[] sortArray(int[] nums) {
+        quickSort(nums,0,nums.length-1);
+        return nums;
+
+    }
+    public static void quickSort(int[] nums,int left,int right){
+        if(left<right){
+            int middle=partition(nums,left,right);
+            quickSort(nums,left,middle-1);
+            quickSort(nums,middle+1,right);
+        }
+    }
+    public static int partition(int[] nums,int left,int right){
+/*      int pivot = nums[left];
+        while(left<right){
+            while(left<right&&pivot<=nums[right]){
+                right--;
+            }
+            nums[left]=nums[right];
+            while(left<right&&pivot>=nums[left]){
+                left++;
+            }
+            nums[right]=nums[left];
+        }
+        nums[left]=pivot;
+        return left;*/
+
+
+        int pivot=nums[right];
+        int savePin=left-1;
+        for(int i=left;i<right;i++){
+            if(nums[i]<pivot){
+                savePin++;
+                swap(nums,i,savePin);
+            }
+        }
+        swap(nums,savePin+1,right);
+        return savePin+1;
+    }
+    public static void swap(int[] nums, int i,int j){
+        int temp=nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+    }
+
+    //909. Snakes and Ladders-maybe later
+    public int snakesAndLadders(int[][] board) {
+        return 1;
+    }
+
     //904. Fruit Into Baskets
     public static int totalFruit(int[] fruits) {
         //faster
